@@ -14,7 +14,7 @@ Prerequisites:
 NodeJS 14(or above) and Java 8 (or above)
 
 - Clone the repo using the below URL
-https://github.com/jagota-s/playwright-typescript-pom.git
+https://github.com/vijaykant0701/TimberSiteAutomation.git
 - Navigate to the folder and install npm packages using:
 ```bash
 - npm install
