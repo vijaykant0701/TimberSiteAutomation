@@ -21,6 +21,11 @@ export class LoginPage extends CommonPage {
     // await this.scenario.a11yAnalysis();
   }
 
+  async navigateToLoginPage() {
+      await this.page.locator(locators.manageAccountButton).click();
+      await this.page.locator(locators.logoutLink).click();
+  }
+
   async validLogin(username, password) {
     //const Locators = locators(this.page);
     //this.Locator :LoginPageLocators;

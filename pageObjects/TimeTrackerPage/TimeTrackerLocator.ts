@@ -3,7 +3,7 @@ export const locators = {
     TimeTracking: 'svg[data-testid="KeyboardArrowDownIcon"]',
     TimeTracker :'li.MuiMenuItem-root:has-text("Time Tracker")',
     addNewEntry: 'svg[data-testid="AddIcon"]',
-    dataTimeInput:'input[type="tel"][placeholder="mm/dd/yyyy hh:mm (a|p)m"]',
+    dataTimeInput:'input[placeholder="MM/DD/YYYY hh:mm aa"][type="text"]',
     calendarIcon: 'svg[data-testid="CalendarIcon"]',
     estimateRadioBtn: '[name="Estimate"]',
     changeOrders : '[name="Change Order"]',
