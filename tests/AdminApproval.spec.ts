@@ -14,7 +14,6 @@ test.describe('TC_003', () => {
     await adminPage.clickSaveAndApprove();
   });
 })
-
 test.describe('TC_011', () => {
   test("Verification of admin approval of field works time entry", async ({ page, loginPage, dashboardPage, timeTrackerPage, reportPage, adminPage }, testinfo) => {
     console.log("test start")
@@ -38,13 +37,13 @@ test.describe('TC_012', () => {
     await loginPage.validLogin(testData.username, testData.password);
     await adminPage.clickOnAdminTab();
     await adminPage.clickOnRecord();
-    await adminPage.enter200Notes();
     await adminPage.changeCostCode();
+    await adminPage.enterTextInNotes();
     await adminPage.clickSaveAndApprove();
   });
 
 });
-test.describe('TC_016', () => {
+test.describe('TC_013', () => {
   test("User will add break to existing entry, save and approve", async ({ page, loginPage, dashboardPage, timeTrackerPage, reportPage, adminPage }, testinfo) => {
     console.log("test start")
     //await context.maximizeWindow();
@@ -59,3 +58,4 @@ test.describe('TC_016', () => {
   });
 
 });
+
