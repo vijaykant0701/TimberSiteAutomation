@@ -15,7 +15,6 @@ test.describe('TC_001', () => {
     await loginPage.goTo();
    
     console.log(testData.qa)
-    
     await loginPage.validLogin(testData.username, testData.password);
     await dashboardPage.verifyTheLandingPage(testData.UserDashBoardName);
     await timeTrackerPage.navigateToTimeTracker();
@@ -33,7 +32,6 @@ test.describe('TC_002', () => {
 
    
     console.log(testData.qa)
-    
     await loginPage.validLogin(testData.username, testData.password);
     await dashboardPage.verifyTheLandingPage(testData.UserDashBoardName);
     await timeTrackerPage.navigateToTimeTracker();
@@ -48,7 +46,6 @@ test.describe('TC_007', () => {
     console.log("test start")
     //await context.maximizeWindow();
     await loginPage.goTo();
-    
     await loginPage.validLogin(testData.username, testData.password);
     await dashboardPage.verifyTheLandingPage(testData.UserDashBoardName);
     await timeTrackerPage.navigateToTimeTracker();
@@ -64,7 +61,6 @@ test.describe('TC_008', () => {
     console.log("test start")
     //await context.maximizeWindow();
     await loginPage.goTo();
-    
     await loginPage.validLogin(testData.username, testData.password);
     await dashboardPage.verifyTheLandingPage(testData.UserDashBoardName);
     await timeTrackerPage.navigateToTimeTracker();

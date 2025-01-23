@@ -6,7 +6,12 @@ export const locators = {
     TimeTracking: 'svg[data-testid="KeyboardArrowDownIcon"]',
     AdminTab: 'li.MuiMenuItem-root:has-text("Admin/Approve")',
     dropdownArrow:'label[for="mui-31"]',
-    addBreak:'//button[text()= "Add"]'
+    addBreak:'//button[text()= "Add"]',
+    estimateDropdownButton:'(//div[contains(@class, "MuiAutocomplete-inputRoot")]//button[@aria-label="Open"])[4]',
+    saveAndApproveButton: '//button[text()= "Save & Approve"]',
+    dateTimeIn:'input[name="timeIn"]',
+    dateTimeOut: 'input[name="timeOut"]'
+
 }
 
 

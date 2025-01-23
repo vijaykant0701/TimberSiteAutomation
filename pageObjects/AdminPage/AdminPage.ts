@@ -81,5 +81,39 @@ export class AdminPage extends CommonPage {
         }
 
     }
+    async addBreak() {
+      await this.page.locator(locators.addBreak).click();
+      await this.page.keyboard.press('Tab');
+      await this.page.keyboard.press('Tab');
+      const now = DateTime.now();
+      const thirtyMinutesAhead = now.plus({ minutes: 30 });
+      const breakDateTime = thirtyMinutesAhead.toFormat('MM/dd/yyyy HH:mm');
+      const breakEndedTime = `${breakDateTime}`;
+      await this.page.keyboard.press('Tab');
+    }
+    async clickSaveAndApprove() {
+      await this.page.locator(locators.saveAndApproveButton).click();
+    }
+
+    async editDateTimeIn() {
+    const dateTimeInput = this.page.locator(locators.dateTimeIn);
+    const currentValue = await dateTimeInput.inputValue();
+    const currentDateTime = DateTime.fromFormat(currentValue, 'MM/dd/yyyy hh:mm p');
+    const updatedDateTime = currentDateTime.plus({ minutes: 30 });
+    const updatedValue = updatedDateTime.toFormat('MM/dd/yyyy hh:mm p');
+    await dateTimeInput.fill(updatedValue);
+    const newValue = await dateTimeInput.inputValue();
+    console.assert(newValue === updatedValue, 'Date/Time was not updated correctly');
+    }
+    async editDateTimeOut() {
+      const dateTimeInput = this.page.locator(locators.dateTimeOut);
+      const currentValue = await dateTimeInput.inputValue();
+      const currentDateTime = DateTime.fromFormat(currentValue, 'MM/dd/yyyy hh:mm p');
+      const updatedDateTime = currentDateTime.plus({ minutes: 30 });
+      const updatedValue = updatedDateTime.toFormat('MM/dd/yyyy hh:mm p');
+      await dateTimeInput.fill(updatedValue);
+      const newValue = await dateTimeInput.inputValue();
+      console.assert(newValue === updatedValue, 'Date/Time was not updated correctly');
+      }
 
 }

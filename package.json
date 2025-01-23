@@ -9,13 +9,12 @@
     "open:allure-report": "npx playwright test --reporter=html",
     "posttest": "npx ts-node base_mehthods/reports/reports.ts"
   },
-  
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@axe-core/playwright": "4.6.0",
-    "@playwright/test": "^1.46.0",
+    "@playwright/test": "^1.49.1",
     "@types/luxon": "^3.4.2",
     "@types/node": "^22.2.0",
     "allure-playwright": "^2.0.0-beta.20",
