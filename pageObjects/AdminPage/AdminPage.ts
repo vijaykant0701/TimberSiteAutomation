@@ -90,7 +90,7 @@ export class AdminPage extends CommonPage {
       await this.page.keyboard.press('Tab');
       const now = DateTime.now();
       const thirtyMinutesAhead = now.plus({ minutes: 30 });
-      const breakDateTime = thirtyMinutesAhead.toFormat('MM/dd/yyyy hh:mm a');
+      const breakDateTime = thirtyMinutesAhead.toFormat('MM/DD/YYYY hh:mm aa');
       const breakEndedTime = `${breakDateTime}`;
       await this.page.keyboard.press('Tab');
     }
@@ -101,9 +101,9 @@ export class AdminPage extends CommonPage {
     async editDateTimeIn() {
       const dateTimeInput = this.page.locator(locators.dateTimeIn);
       const currentValue = await dateTimeInput.inputValue();
-      const currentDateTime = DateTime.fromFormat(currentValue, 'MM/dd/yyyy hh:mm p');
+      const currentDateTime = DateTime.fromFormat(currentValue, 'MM/DD/YYYY hh:mm aa');
       const updatedDateTime = currentDateTime.plus({ minutes: 30 });
-      const updatedValue = updatedDateTime.toFormat('MM/dd/yyyy hh:mm p');
+      const updatedValue = updatedDateTime.toFormat('MM/DD/YYYY hh:mm aa');
       await dateTimeInput.fill(updatedValue);
       const newValue = await dateTimeInput.inputValue();
       console.assert(newValue === updatedValue, 'Date/Time was not updated correctly');
@@ -111,9 +111,9 @@ export class AdminPage extends CommonPage {
     async editDateTimeOut() {
       const dateTimeInput = this.page.locator(locators.dateTimeOut);
       const currentValue = await dateTimeInput.inputValue();
-      const currentDateTime = DateTime.fromFormat(currentValue, 'MM/dd/yyyy hh:mm p');
+      const currentDateTime = DateTime.fromFormat(currentValue, 'MM/DD/YYYY hh:mm aa');
       const updatedDateTime = currentDateTime.plus({ minutes: 30 });
-      const updatedValue = updatedDateTime.toFormat('MM/dd/yyyy hh:mm p');
+      const updatedValue = updatedDateTime.toFormat('MM/DD/YYYY hh:mm aa');
       await dateTimeInput.fill(updatedValue);
       const newValue = await dateTimeInput.inputValue();
       console.assert(newValue === updatedValue, 'Date/Time was not updated correctly');
@@ -143,24 +143,70 @@ export class AdminPage extends CommonPage {
     
         const dateTimeInput = this.page.locator(locators.breakStartTime);
         const currentValue = await dateTimeInput.inputValue();
-        const currentDateTime = DateTime.fromFormat(currentValue, 'MM/dd/yyyy hh:mm a');
-        const updatedDateTime = currentDateTime.set({ hour: 12, minute: 0 });
-        const updatedValue = updatedDateTime.toFormat('MM/dd/yyyy hh:mm a');
+        const currentDateTime = DateTime.fromFormat(currentValue, 'MM/DD/YYYY hh:mm aa');
+        if (!currentDateTime.isValid) {
+        throw new Error(`Invalid date/time format: ${currentValue}`);
+        }
+        const updatedDateTime = currentDateTime.set({ hour: 12, minute: 0, second: 0 });
+        const updatedValue = updatedDateTime.toFormat('MM/DD/YYYY hh:mm aa');
         await dateTimeInput.fill(updatedValue);
         const newValue = await dateTimeInput.inputValue();
-        console.assert(newValue === updatedValue, 'Date/Time was not updated correctly');
-    
-    }
+        console.assert(newValue === updatedValue, `Date/Time was not updated correctly. Expected: ${updatedValue}, Found: ${newValue}`);
+        }
 
     async selectBreakEndTime() {
       const dateTimeInput = this.page.locator(locators.breakOutTime);
       const currentValue = await dateTimeInput.inputValue();
-      const currentDateTime = DateTime.fromFormat(currentValue, 'MM/dd/yyyy hh:mm a');
-      const updatedDateTime = currentDateTime.set({ hour: 13, minute: 0 });
-      const updatedValue = updatedDateTime.toFormat('MM/dd/yyyy hh:mm a');
+      const currentDateTime = DateTime.fromFormat(currentValue, 'MM/DD/YYYY hh:mm aa');
+      const updatedDateTime = currentDateTime.set({ hour: 13, minute: 0, second: 0 });
+      const updatedValue = updatedDateTime.toFormat('MM/DD/YYYY hh:mm aa');
       await dateTimeInput.fill(updatedValue);
       const newValue = await dateTimeInput.inputValue();
       console.assert(newValue === updatedValue, 'Date/Time was not updated correctly');
+      }
+
+  async selectLastMonthFromRange() {
+    const timeInOutRangeDropdown = this.page.locator(locators.timeInOutRange);
+    await timeInOutRangeDropdown.click();
+
+    const rangeOption = this.page.locator(locators.dropdownOption, { hasText: 'Last month' });
+    await rangeOption.click();
   }
 
+  async selectProjectManager() {
+    const projectManagerDropdown = this.page.locator(locators.projectManagerDropdown);
+    await projectManagerDropdown.click();
+    const dropDownOptions = this.page.locator(locators.dropdownOption, { hasText: 'Vijay K' });
+    await dropDownOptions.click();
+    const selectedValue = await projectManagerDropdown.inputValue();
+    console.assert(selectedValue === 'Vijay K', 'Project Manager was not updated correctly');
+  }
+
+  async selectStatus() {
+    const statusDropdown = this.page.locator(locators.statusDropdown).nth(1);
+    await statusDropdown.click();
+
+    const statusOption = this.page.locator(locators.dropdownOption, { hasText: 'Pending' });
+    await statusOption.click();
+  }
+
+  async selectProject() {
+    const projectDropdown = this.page.locator(locators.projectDropdown).nth(1);
+    await projectDropdown.click();
+
+    const projectOption = this.page.locator(locators.dropdownOption, { hasText: 'Project 1 Test' });
+    await projectOption.click();
+  }
+
+  async selectWorkers() {
+    const workersDropdown = this.page.locator(locators.workersDropdown).nth(2);
+    await workersDropdown.click();
+
+    const projectOption = this.page.locator(locators.dropdownOption, { hasText: 'Vijay K' });
+    await projectOption.click();
+
+    await workersDropdown.click();
+    const projectOption2 = this.page.locator(locators.dropdownOption, { hasText: 'Jeff Reed' });
+    await projectOption2.click();
+  }
 }
