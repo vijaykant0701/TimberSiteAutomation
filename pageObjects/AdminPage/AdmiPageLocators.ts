@@ -15,7 +15,13 @@ export const locators = {
     changeCostCode:'(//div[contains(@class, "MuiAutocomplete-inputRoot")]//button[@aria-label="Open"])[4]',
     breakStartTime:"//label[contains(text(), 'Break started')]/following::input[@name='timeIn']",
     breakOutTime:"//label[contains(text(), 'Break ended')]/following::input[@name='timeOut']",
-    estimateRadioButton:'input[type="radio"][value="li"]'
+    estimateRadioButton:'input[type="radio"][value="li"]',
+    timeInOutRange:'label:has-text("Time In/Out range:") + div div[role="combobox"]',
+    dropdownOption:'li[role="option"]',
+    projectManagerDropdown:'label:has-text("Project Manager") + div input[role="combobox"]',
+    statusDropdown:'div div[role="combobox"]',
+    projectDropdown:'div button[aria-label="Open"]',
+    workersDropdown:'div button[aria-label="Open"]'
 
 }
 

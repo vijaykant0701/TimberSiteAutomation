@@ -59,3 +59,19 @@ test.describe('TC_013', () => {
 
 });
 
+test.describe('TC_010', () => {
+  test("User will utilize all available filters ", async ({ page, loginPage, dashboardPage, timeTrackerPage, reportPage, adminPage }, testinfo) => {
+    console.log("test start")
+    //await context.maximizeWindow();
+    await loginPage.goTo();
+    await loginPage.validLogin(testData.username, testData.password);
+    await adminPage.clickOnAdminTab();
+    await adminPage.selectLastMonthFromRange();
+    await adminPage.selectProjectManager();
+    await adminPage.selectStatus();
+    await adminPage.selectProject();
+    await adminPage.selectWorkers();
+  });
+
+});
+
