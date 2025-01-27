@@ -11,4 +11,5 @@ export const testData = {
     ValueEstimate:'First estimate 1 test',
     clockIN:'08:00 am',
     clockOut:'05:00 pm',
+    hourlyDownloadReport:'Timetracking Hourly.xlsx',
 }
