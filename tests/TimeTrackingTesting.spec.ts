@@ -68,3 +68,21 @@ test.describe('TC_008', () => {
   });
 
 });
+
+test.describe('TC_009', () => {
+  console.log("Field worker will clock in and use the directions feature");
+  test("TC_009", async ({ page, context, browser, loginPage, dashboardPage, timeTrackerPage }) => {
+    console.log("test start")
+    //await context.maximizeWindow();
+    await loginPage.goTo();
+    await loginPage.validLogin(testData.username, testData.password);
+    await dashboardPage.verifyTheLandingPage(testData.UserDashBoardName);
+    await timeTrackerPage.navigateToTimeTracker();
+    await timeTrackerPage.clickOnNewEntry();
+    await timeTrackerPage.selectEstimateAndApprovedDropdown();
+    await timeTrackerPage.selectCostCode();
+    await timeTrackerPage.clickOkBtn();
+    await timeTrackerPage.clickDirectionButton();
+  });
+
+});

@@ -187,4 +187,37 @@ export class TimeTrackerPage extends CommonPage {
 
     }
 
+    async clickOnNewEntry() {
+        await this.page.locator(locators.TimeTracker).click();
+        await this.page.locator(locators.addNewEntry).click();
+    }
+
+    async selectEstimateAndApprovedDropdown() {
+        await this.page.waitForTimeout(2000);
+        await this.page.locator(locators.estimateRadioButton).click();
+        await this.page.waitForTimeout(2000);
+        await this.page.locator(locators.estimateDropdownButton).click();
+        await this.page.keyboard.press('ArrowDown');
+        await this.page.keyboard.press('Enter');
+    }
+
+    async selectCostCode() {
+        await this.page.locator(locators.costCodeDropdown).click();
+        //await this.page.waitForTimeout(2000);
+        await this.page.waitForTimeout(2000);
+        // await this.page.keyboard.press('Tab');
+        // await this.page.keyboard.type("Floo");
+        await this.page.keyboard.press('ArrowDown');
+        await this.page.keyboard.press('Enter');
+        await this.page.waitForTimeout(2000);
+    }
+
+    async clickOkBtn() {
+        await this.page.locator(locators.btn_OK).click();
+    }
+
+    async clickDirectionButton() {
+        await this.page.locator(locators.directionButton).click();
+    }
+
 }

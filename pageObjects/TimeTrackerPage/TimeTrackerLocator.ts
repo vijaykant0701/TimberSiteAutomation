@@ -16,6 +16,11 @@ export const locators = {
     txtNote:'//*[@id="outlined-textarea-label"]',
     changeCostCode:'svg[data-testid="EditIcon"]',
     btn_Save:'//button[text()= "Save"]',
+    directionButton:'button:has-text("Directions")',
+    estimateRadioButton:'input[type="radio"][value="li"]',
+    estimateDropdownButton:'(//div[contains(@class, "MuiAutocomplete-inputRoot")]//button[@aria-label="Open"])[2]',
+    costCodeDropdown:'(//div[contains(@class, "MuiAutocomplete-inputRoot")]//button[@aria-label="Open"])[3]',
+
 }
 
 
