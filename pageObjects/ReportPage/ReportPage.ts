@@ -2,6 +2,10 @@ import { expect, Page } from "@playwright/test";
 import { CommonPage } from "../../base_methods/common/CommonPage";
 import { CommonScenario } from "../../base_methods/common/CommonScenario";
 import { locators } from "./ReportPageLocators";
+import * as fs from 'fs';
+import * as path from 'path';
+import { testData } from "../../tests/testData";
+
 
 export class ReportPage extends CommonPage {
 
@@ -10,28 +14,91 @@ export class ReportPage extends CommonPage {
     }
 
 
-    async searchCountryAndSelect(countryCode: string, countryName: string) {
+    async VerificationOfAdminDownloadingTimeReport() {
+        this.clickOnReportTab();
+        // //await this.page.locator(locators.TimeTracking).click();
+        // //await this.page.locator(locators.ReportTab).click();
+        this.clickOnDownloads();
+        // //this.clickOnDownloads();
 
-        await this.page.locator(locators.country).type(countryCode, { delay: 100 });
-        await this.page.locator(locators.dropdown).waitFor();
-        const optionsCount = await this.page.locator(locators.dropdown).locator("button").count();
-        for (let i = 0; i < optionsCount; ++i) {
-            const text = await this.page.locator(locators.dropdown).locator("button").nth(i).textContent();
-            if (text?.trim() === countryName) {
-                await this.page.locator(locators.dropdown).locator("button").nth(i).click();
-                break;
-            }
+    }
+
+    async clickOnReportTab() {
+        await this.page.locator(locators.TimeTracking).click();
+        await this.page.waitForTimeout(2000);
+        await this.page.locator(locators.ReportTab).click();
+    }
+
+    async clickOnDownloads() {
+        await this.page.click('button:has-text("Save Report")');
+        //a// 3. Handle the download event
+        let downloadedFile;
+        this.page.on('download', (download) => {
+            downloadedFile = download;
+        });
+
+        // 4. Wait for the download to complete (with timeout)
+
+        await Promise.race([
+            new Promise<void>((resolve) => {
+                const intervalId = setInterval(() => {
+                    if (downloadedFile) {
+                        clearInterval(intervalId);
+                        resolve();
+                    }
+                }, 100); // Check every 100ms
+            }),
+            new Promise<void>((_, reject) => {
+                setTimeout(() => {
+                    reject(new Error('Download timed out'));
+                }, 10000); // Timeout after 10 seconds
+            }),
+        ]);
+
+        // 5. Extract the actual file name
+        const downloadedFileName = downloadedFile.suggestedFilename();
+
+        // 6. Determine the download path 
+        let downloadPath;
+        if (process.platform === 'darwin') {
+            // macOS
+            downloadPath = process.env.HOME + '/Downloads';
+        } else if (process.platform === 'win32') {
+            // Windows
+            downloadPath = process.env.USERPROFILE + '\\Downloads';
+        } else {
+            // Linux
+            downloadPath = '/home/' + process.env.USER + '/Downloads';
         }
-    }
 
-    async VerifyEmailId(username) {
-        await expect(this.page.locator(locators.emailId)).toHaveText(username);
-    }
+        // 7. Save the downloaded file to the desired location
+        const fullFilePath = downloadPath + '/' + downloadedFileName;
+        await downloadedFile.saveAs(fullFilePath);
+        console.log(downloadedFileName);
+        // 7. Expected file name (optional)
+        const expectedFileName = testData.hourlyDownloadReport;
 
-    async SubmitAndGetOrderId() {
-        await this.page.locator(locators.submit).click();
-        await expect(await this.page.locator(locators.orderConfirmationText)).toHaveText(" Thankyou for the order. ");
-        const orderID = await this.page.locator(locators.orderId).textContent();
-        this.setValue("orderId", orderID!);
+        // 8. Validation: Downloaded file name (optional)
+        if (expectedFileName) {
+            expect(downloadedFileName).toBe(expectedFileName);
+        }
+
+        // 8. Read the downloaded file content
+        const fileContent = await this.page.evaluate((filePath) => {
+            return fetch(filePath)
+                .then(response => response.text())
+                .catch(error => {
+                    console.error('Error reading file:', error);
+                    return '';
+                });
+        }, fullFilePath);
+
+
+        // // 10. Optional: Clean up (delete the downloaded file)
+        // await this.page.evaluate(() => {
+        //     return fs.unlinkSync(fullFilePath); // Requires node:fs
+        // });
+
     }
 }
+
