@@ -116,6 +116,9 @@ export class AdminPage extends CommonPage {
   
       // Use the correct format to parse the current value
       const inputDateTime = DateTime.fromFormat(currentValue, 'MM/DD/YYYY hh:mm aa');
+      if (!inputDateTime.isValid) {
+          throw new Error('Failed to parse the current date/time. Please verify the input format.');
+      }
       const updatedDateTime = inputDateTime.plus({ minutes: 30 });
       const updatedValue = updatedDateTime.toFormat('MM/DD/YYYY hh:mm aa');
       console.log(`Updated Date-Time Value: ${updatedValue}`);
@@ -134,6 +137,9 @@ export class AdminPage extends CommonPage {
   
       // Use the correct format to parse the current value
       const inputDateTime = DateTime.fromFormat(currentValue, 'MM/DD/YYYY hh:mm aa');
+      if (!inputDateTime.isValid) {
+          throw new Error('Failed to parse the current date/time. Please verify the input format.');
+      }
       const updatedDateTime = inputDateTime.plus({ minutes: 30 });
       const updatedValue = updatedDateTime.toFormat('MM/DD/YYYY hh:mm aa');
       console.log(`Updated Date-Time Value: ${updatedValue}`);

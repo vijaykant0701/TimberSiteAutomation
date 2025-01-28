@@ -21,7 +21,7 @@ export const locators = {
     projectManagerDropdown:'label:has-text("Project Manager") + div input[role="combobox"]',
     statusDropdown:'div div[role="combobox"]',
     projectDropdown:'div button[aria-label="Open"]',
-    workersDropdown:'div button[aria-label="Open"]'
+    workersDropdown:'div button[aria-label="Open"]',
 
 }
 
