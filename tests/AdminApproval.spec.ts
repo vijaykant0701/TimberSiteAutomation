@@ -46,7 +46,6 @@ test.describe('TC_012', () => {
 test.describe('TC_013', () => {
   test("User will add break to existing entry, save and approve", async ({ page, loginPage, dashboardPage, timeTrackerPage, reportPage, adminPage }, testinfo) => {
     console.log("test start")
-    //await context.maximizeWindow();
     await loginPage.goTo();
     await loginPage.validLogin(testData.username, testData.password);
     await adminPage.clickOnAdminTab();
