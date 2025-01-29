@@ -2,7 +2,7 @@
 export const locators = {
     TimeTracking: 'svg[data-testid="KeyboardArrowDownIcon"]',
     TimeTracker :'li.MuiMenuItem-root:has-text("Time Tracker")',
-    addNewEntry: 'svg[data-testid="AddIcon"]',
+    addNewEntry: "//*[normalize-space(text())='New Time Entry']",//'svg[data-testid="AddIcon"]',
     dataTimeInput:'input[placeholder="MM/DD/YYYY hh:mm aa"][type="text"]',
     calendarIcon: 'svg[data-testid="CalendarIcon"]',
     estimateRadioBtn: '[name="Estimate"]',
