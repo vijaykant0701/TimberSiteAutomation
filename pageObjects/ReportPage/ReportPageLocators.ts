@@ -6,7 +6,8 @@ export const locators = {
     saveReport :'.//*[text()="Save Report"]',//Save Report
     submit :".action__submit",
     orderConfirmationText :".hero-primary",
-    orderId : ".em-spacer-1 .ng-star-inserted"
+    orderId : ".em-spacer-1 .ng-star-inserted",
+    typeDropdown:"//div[@id='Type']",
 }
 
 
