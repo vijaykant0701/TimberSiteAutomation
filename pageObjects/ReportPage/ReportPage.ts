@@ -14,15 +14,6 @@ export class ReportPage extends CommonPage {
     }
 
 
-    async VerificationOfAdminDownloadingTimeReport() {
-        this.clickOnReportTab();
-        // //await this.page.locator(locators.TimeTracking).click();
-        // //await this.page.locator(locators.ReportTab).click();
-        this.clickOnDownloads();
-        // //this.clickOnDownloads();
-
-    }
-
     async clickOnReportTab() {
         await this.page.locator(locators.TimeTracking).click();
         await this.page.waitForTimeout(2000);
@@ -92,13 +83,6 @@ export class ReportPage extends CommonPage {
                     return '';
                 });
         }, fullFilePath);
-
-
-        // // 10. Optional: Clean up (delete the downloaded file)
-        // await this.page.evaluate(() => {
-        //     return fs.unlinkSync(fullFilePath); // Requires node:fs
-        // });
-
     }
 }
 

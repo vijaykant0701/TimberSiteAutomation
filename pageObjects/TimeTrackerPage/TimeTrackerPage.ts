@@ -38,6 +38,7 @@ export class TimeTrackerPage extends CommonPage {
         await this.page.keyboard.type("First estimate 1 test");
         await this.page.waitForTimeout(2000);
         await this.page.keyboard.press('ArrowDown');
+        await this.page.waitForTimeout(2000);
         await this.page.keyboard.press('Enter');
         await this.page.waitForTimeout(2000);
         await this.page.keyboard.press('Tab');
@@ -45,17 +46,21 @@ export class TimeTrackerPage extends CommonPage {
         await this.page.waitForTimeout(2000);
         await this.page.keyboard.press('ArrowDown');
         await this.page.keyboard.press('Enter');
+        await this.page.waitForTimeout(2000);
         await this.page.locator(locators.btn_OK).click();
         const clockout = await this.page.locator(locators.clockOut).isEnabled;
         expect(clockout).toBeTruthy;
-        await this.page.waitForTimeout(1000);
+        await this.page.waitForTimeout(3000);
         await this.page.locator(locators.clockOut).click();
-        //await this.page.waitForTimeout(2000);
+        await this.page.waitForTimeout(5000);
         await this.page.locator(locators.dataTimeInput).fill(dateTimeValueClockOut);
+        await this.page.waitForTimeout(3000);
         await this.page.locator(locators.btn_OK).click();
         await this.page.waitForTimeout(2000);
         const costCodeElement = this.page.locator(locators.resultTable);
+        await this.page.waitForTimeout(2000);
         const costCodeValue = this.page.locator(locators.addNewEntry).isVisible;
+        await this.page.waitForTimeout(2000);
         console.log(costCodeValue);
         expect(costCodeValue).toBeTruthy;
         //this.takeScreenshot("Time tracking added");
@@ -156,19 +161,21 @@ export class TimeTrackerPage extends CommonPage {
         await this.page.locator(locators.dataTimeInput).fill(dateTimeValueClockIn); 
         await this.page.waitForTimeout(5000);
         await this.page.locator(locators.calendarIcon).click();
+        await this.page.waitForTimeout(1000);
         await this.page.keyboard.press('Tab');
         await this.page.keyboard.press('Tab');
         await this.page.waitForTimeout(2000);
         await this.page.keyboard.type("First estimate 1 test");
-        await this.page.waitForTimeout(2000);
+        //await this.page.waitForTimeout(2000);
         await this.page.keyboard.press('ArrowDown');
         await this.page.keyboard.press('Enter');
         await this.page.waitForTimeout(2000);
         await this.page.keyboard.press('Tab');
         await this.page.keyboard.type("Demo");
-        //await this.page.waitForTimeout(2000);
+        await this.page.waitForTimeout(2000);
         await this.page.keyboard.press('ArrowDown');
         await this.page.keyboard.press('Enter');
+        await this.page.waitForTimeout(4000);
         const labelLocator = this.page.locator(locators.txtNote);
         labelLocator.fill(testData.textNote)
 
