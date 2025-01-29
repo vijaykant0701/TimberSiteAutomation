@@ -56,7 +56,9 @@ export class AdminPage extends CommonPage {
         await this.page.locator(locators.estimateRadioButton).click();
         await this.page.waitForTimeout(2000);
         await this.page.locator(locators.estimateDropdownButton).click();
-        await this.page.keyboard.press('ArrowDown');
+        //await this.page.waitForTimeout(2000);
+        //await this.page.keyboard.press('ArrowDown');
+        await this.page.waitForTimeout(2000);
         await this.page.keyboard.press('Enter');
         await this.page.waitForTimeout(2000);
         await this.page.keyboard.press('Tab');
@@ -85,18 +87,20 @@ export class AdminPage extends CommonPage {
 
     }
     async addBreak() {
+      await this.page.waitForSelector(locators.addBreak, { timeout: 10000 }); 
       await this.page.locator(locators.addBreak).click();
+      await this.page.waitForLoadState('domcontentloaded');
       //await this.page.keyboard.press('Tab');
       //await this.page.keyboard.press('Tab');
       const now = new Date();
     const futureTime = new Date(now.getTime() + 30 * 60 * 1000);
-    const mm = String(futureTime.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+    const mm = String(futureTime.getMonth() + 1).padStart(2, '0'); 
     const dd = String(futureTime.getDate()).padStart(2, '0');
     const yyyy = futureTime.getFullYear();
     let hours = futureTime.getHours();
     const minutes = String(futureTime.getMinutes()).padStart(2, '0');
     const ampm = hours >= 12 ? 'PM' : 'AM';
-    hours = hours % 12 || 12; // Convert to 12-hour format
+    hours = hours % 12 || 12; 
     const hh = String(hours).padStart(2, '0');
     const formattedDateTime = `${mm}/${dd}/${yyyy} ${hh}:${minutes} ${ampm}`;
     console.log(`Formatted Date-Time (30 mins ahead): ${formattedDateTime}`);
@@ -111,45 +115,39 @@ export class AdminPage extends CommonPage {
 
     async editDateTimeIn() {
       const dateTimeInput = this.page.locator(locators.dateTimeIn);
-      const currentValue = await dateTimeInput.inputValue();
-      console.log(`Current Input Value: ${currentValue}`);
-  
-      // Use the correct format to parse the current value
-      const inputDateTime = DateTime.fromFormat(currentValue, 'MM/DD/YYYY hh:mm aa');
-      if (!inputDateTime.isValid) {
-          throw new Error('Failed to parse the current date/time. Please verify the input format.');
-      }
-      const updatedDateTime = inputDateTime.plus({ minutes: 30 });
-      const updatedValue = updatedDateTime.toFormat('MM/DD/YYYY hh:mm aa');
-      console.log(`Updated Date-Time Value: ${updatedValue}`);
-      await dateTimeInput.fill(updatedValue);
-      const newValue = await dateTimeInput.inputValue();
-      console.log(`New Input Value After Fill: ${newValue}`);
-      console.assert(
-          newValue.trim().toLowerCase() === updatedValue.trim().toLowerCase(),
-          'Date/Time was not updated correctly'
-      );
+      const now = new Date();
+    const futureTime = new Date(now.getTime() + 30 * 60 * 1000);
+    const mm = String(futureTime.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+    const dd = String(futureTime.getDate()).padStart(2, '0');
+    const yyyy = futureTime.getFullYear();
+    let hours = futureTime.getHours();
+    const minutes = String(futureTime.getMinutes()).padStart(2, '0');
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12 || 12; // Convert to 12-hour format
+    const hh = String(hours).padStart(2, '0');
+    const formattedDateTime = `${mm}/${dd}/${yyyy} ${hh}:${minutes} ${ampm}`;
+    console.log(`Formatted Date-time : ${formattedDateTime}`);
+    await this.page.fill(locators.dateTimeIn, formattedDateTime);
+    const enteredDateTime = await this.page.inputValue(locators.dateTimeIn);
+    console.log(`Entered Date-Time: ${enteredDateTime}`);
     }
     async editDateTimeOut() {
-      const dateTimeInput = this.page.locator(locators.dateTimeOut);
-      const currentValue = await dateTimeInput.inputValue();
-      console.log(`Current Input Value: ${currentValue}`);
-  
-      // Use the correct format to parse the current value
-      const inputDateTime = DateTime.fromFormat(currentValue, 'MM/DD/YYYY hh:mm aa');
-      if (!inputDateTime.isValid) {
-          throw new Error('Failed to parse the current date/time. Please verify the input format.');
-      }
-      const updatedDateTime = inputDateTime.plus({ minutes: 30 });
-      const updatedValue = updatedDateTime.toFormat('MM/DD/YYYY hh:mm aa');
-      console.log(`Updated Date-Time Value: ${updatedValue}`);
-      await dateTimeInput.fill(updatedValue);
-      const newValue = await dateTimeInput.inputValue();
-      console.log(`New Input Value After Fill: ${newValue}`);
-      console.assert(
-          newValue.trim().toLowerCase() === updatedValue.trim().toLowerCase(),
-          'Date/Time was not updated correctly'
-      );
+      const dateTimeOut = this.page.locator(locators.dateTimeOut);
+      const now = new Date();
+    const futureTime = new Date(now.getTime() + 8 * 60 * 60 * 1000);
+    const mm = String(futureTime.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+    const dd = String(futureTime.getDate()).padStart(2, '0');
+    const yyyy = futureTime.getFullYear();
+    let hours = futureTime.getHours();
+    const minutes = String(futureTime.getMinutes()).padStart(2, '0');
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12 || 12; // Convert to 12-hour format
+    const hh = String(hours).padStart(2, '0');
+    const formattedDateTime = `${mm}/${dd}/${yyyy} ${hh}:${minutes} ${ampm}`;
+    console.log(`Formatted Date-time : ${formattedDateTime}`);
+    await this.page.fill(locators.dateTimeOut, formattedDateTime);
+    const enteredDateTime = await this.page.inputValue(locators.dateTimeOut);
+    console.log(`Entered Date-Time: ${enteredDateTime}`);
     }
 
     async enterTextInNotes() {
@@ -158,7 +156,7 @@ export class AdminPage extends CommonPage {
 
     }
     async changeCostCode() {
-      await this.page.locator(locators.costCode).click();
+      await this.page.locator(locators.costCode).nth(5).click();
               //await this.page.waitForTimeout(2000);
               await this.page.waitForTimeout(2000);
               // await this.page.keyboard.press('Tab');
@@ -174,27 +172,31 @@ export class AdminPage extends CommonPage {
 
     async selectBreakStartTime() {
       const now = new Date();
-      const mm = String(now.getMonth()+1).padStart(2, '0'); // Months are 0-based
+      const mm = String(now.getMonth()+1).padStart(2, '0'); 
       const dd = String(now.getDate()).padStart(2, '0');
       const yyyy = now.getFullYear();
       const fixedTime = '12:00 PM';
-      const formattedDateTime = `${mm}/${dd}/${yyyy} ${fixedTime}`;
-      console.log(`Formatted Date-Time : ${formattedDateTime}`);
-      await this.page.fill(locators.breakStartTime, formattedDateTime);
-      const enteredDateTime = await this.page.inputValue(locators.breakStartTime);
-      console.log(`Entered Date-Time: ${enteredDateTime}`);
+      const formattedBreakStTime = `${mm}/${dd}/${yyyy} ${fixedTime}`;
+      console.log(`Formatted Date-Time : ${formattedBreakStTime}`);
+      await this.page.fill(locators.breakStartTime, formattedBreakStTime);
+      await this.page.waitForTimeout(2000);
+      const enteredBreakStartTime = await this.page.inputValue(locators.breakStartTime);
+      await this.page.waitForTimeout(2000);
+      console.log(`Entered Date-Time: ${enteredBreakStartTime}`);
     }
     async selectBreakEndTime() {
       const now = new Date();
-      const mm = String(now.getMonth()+1).padStart(2, '0'); // Months are 0-based
+      const mm = String(now.getMonth()+1).padStart(2, '0'); 
       const dd = String(now.getDate()).padStart(2, '0');
       const yyyy = now.getFullYear();
       const fixedTime = '13:00 PM';
-      const formattedDateTime = `${mm}/${dd}/${yyyy} ${fixedTime}`;
-      console.log(`Formatted Date-Time : ${formattedDateTime}`);
-      await this.page.fill(locators.breakOutTime, formattedDateTime);
-      const enteredDateTime = await this.page.inputValue(locators.breakOutTime);
-      console.log(`Entered Date-Time: ${enteredDateTime}`);
+      const formattedBreakOutTime = `${mm}/${dd}/${yyyy} ${fixedTime}`;
+      console.log(`Formatted Date-Time : ${formattedBreakOutTime}`);
+      await this.page.fill(locators.breakOutTime, formattedBreakOutTime);
+      await this.page.waitForTimeout(2000);
+      const enteredBreakOutTime = await this.page.inputValue(locators.breakOutTime);
+      await this.page.waitForTimeout(2000);
+      console.log(`Entered Date-Time: ${enteredBreakOutTime}`);
       }
 
   async selectLastMonthFromRange() {

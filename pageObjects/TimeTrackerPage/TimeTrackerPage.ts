@@ -144,6 +144,7 @@ export class TimeTrackerPage extends CommonPage {
     }
 
 
+    
     async VerificationOfUserClockInToEstimateWithChangeCostCode(){
         await this.page.locator(locators.TimeTracker).click();
         
@@ -205,6 +206,7 @@ export class TimeTrackerPage extends CommonPage {
 
     async clickOnNewEntry() {
         await this.page.locator(locators.TimeTracker).click();
+        await this.page.waitForTimeout(2000);
         await this.page.locator(locators.addNewEntry).click();
     }
 
