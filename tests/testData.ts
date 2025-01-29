@@ -12,4 +12,5 @@ export const testData = {
     clockIN:'08:00 am',
     clockOut:'05:00 pm',
     hourlyDownloadReport:'Timetracking Hourly.xlsx',
+    invoiceDownloadReport:'Timetracking Invoice.xlsx',
 }

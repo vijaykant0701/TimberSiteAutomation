@@ -12,7 +12,7 @@ export const locators = {
     dateTimeIn:'input[name="timeIn"]',
     dateTimeOut: 'input[name="timeOut"]',
     txtNote:"//*[normalize-space(text())='Field Worker Notes']//following::textarea[1]",
-    changeCostCode:'(//div[contains(@class, "MuiAutocomplete-inputRoot")]//button[@aria-label="Open"])[4]',
+    costCode:'//div[contains(@class, "MuiAutocomplete-inputRoot")]//button[@aria-label="Open"]',
     breakStartTime:"//label[contains(text(), 'Break started')]/following::input[@name='timeIn']",
     breakOutTime:"//label[contains(text(), 'Break ended')]/following::input[@name='timeOut']",
     estimateRadioButton:'input[type="radio"][value="li"]',
@@ -21,7 +21,7 @@ export const locators = {
     projectManagerDropdown:'label:has-text("Project Manager") + div input[role="combobox"]',
     statusDropdown:'div div[role="combobox"]',
     projectDropdown:'div button[aria-label="Open"]',
-    workersDropdown:'div button[aria-label="Open"]'
+    workersDropdown:'div button[aria-label="Open"]',
 
 }
 
