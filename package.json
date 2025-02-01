@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "npx playwright test tests",
-    "test:reporter": "npx playwright test tests --headed --reporter=allure-playwright",
-    "open:allure-report": "npx playwright test --reporter=html",
+    "test:headed reporter": "npx playwright test tests/RunAll.spec.ts --headed --reporter=html",
+    "open:headlesseport": "npx playwright test --reporter=html",
     "posttest": "npx ts-node base_mehthods/reports/reports.ts"
   },
   "keywords": [],

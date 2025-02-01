@@ -8,22 +8,19 @@ import { kMaxLength } from "buffer";
 
 export class LoginPage extends CommonPage {
 
-  Constructor(Page: any, commonScenarioPage: any, context) { 
+  Constructor(Page: any, commonScenarioPage: any, context) {
     // ... constructor logic
-}
+  }
   async goTo() {
-    
-    await this.page.goto(testData.qa);
-    //await this.page.setViewportSize({ width: 1000, height: 2000 });
 
-    
-    // await this.page.waitForLoadState("domcontentloaded");
-    // await this.scenario.a11yAnalysis();
+    await this.page.goto(testData.qa);
+    await this.page.waitForTimeout(3000);
+    await this.page.keyboard.press('Control+Meta+F');
   }
 
   async navigateToLoginPage() {
-      await this.page.locator(locators.manageAccountButton).click();
-      await this.page.locator(locators.logoutLink).click();
+    await this.page.locator(locators.manageAccountButton).click();
+    await this.page.locator(locators.logoutLink).click();
   }
 
   async validLogin(username, password) {

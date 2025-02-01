@@ -6,6 +6,8 @@ import { TimeTrackerPage } from '../../pageObjects/TimeTrackerPage/TimeTrackerPa
 import { Page, test as baseTest } from "@playwright/test";
 import { CommonScenario } from "../common/CommonScenario";
 import { CommonPage } from "../common/CommonPage";
+import { chromium, Browser } from 'playwright';
+
 
 // declaring the objects type for autocompletion 
 interface PageObjects {
@@ -59,12 +61,17 @@ const test = baseTest.extend<PageObjects>({
 // });
 // hooks as fixtures
 // let authenticatedPage: Page;
-test.beforeEach(async ({ browser }) => {
+test.beforeEach(async ({}) => {
+    // const browser: Browser = await chromium.launch({
+    //     headless: false,
+    //     args: ['--start-maximized'], // Maximize the window on launch
+    //   });
+  
    console.log('beforeEach tests');
 });
 
 test.afterEach(async ({ page}) => {
-   await page.close();
+   //await page.close();
 });
 
 // export default and name export so spec files can use it 
