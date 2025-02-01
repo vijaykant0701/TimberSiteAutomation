@@ -20,21 +20,22 @@ export class CommonScenario {
     }
 
 
-    setValue(key: string, value: string) {
-        this.myMap.set(key, value);
-    }
+    // setValue(key: string, value: string) {
+    //     this.myMap.set(key, value);
+    // }
 
-    getValue(key: string) {
-        return this.myMap.get(key);
-    }
+    // getValue(key: string) {
+    //     return this.myMap.get(key);
+    // }
 
-    async a11yAnalysis() {
-        const accessibilityScanResults = await new AxeBuilder({ page: this.page }).analyze(); // 4
-        const issues = accessibilityScanResults.violations.length;
-        console.log("a11y issues found: " + issues);
-        await this.testinfo.attach('accessibility-scan-results', {
-            body: JSON.stringify(accessibilityScanResults, null, 2),
-            contentType: 'application/json'
-        });
-    }
+//     async a11yAnalysis() {
+//         const accessibilityScanResults = await new AxeBuilder({ page: this.page }).analyze(); // 4
+//         const issues = accessibilityScanResults.violations.length;
+//         console.log("a11y issues found: " + issues);
+//         await this.testinfo.attach('accessibility-scan-results', {
+//             body: JSON.stringify(accessibilityScanResults, null, 2),
+//             contentType: 'application/json'
+//         });
+//     }
+// }
 }

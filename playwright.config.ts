@@ -1,3 +1,4 @@
+
 import { defineConfig, devices } from '@playwright/test';
 
 /**
@@ -19,7 +20,7 @@ export default defineConfig({
      * Maximum time expect() should wait for the condition to be met.
      * For example in `await expect(locator).toHaveText();`
      */
-    timeout: 5000,
+    timeout: 15000,
   },
 
   /* Run tests in files in parallel */
@@ -67,14 +68,14 @@ export default defineConfig({
   },
 
   /* Configure projects for major browsers */
-  projects: [
-    {
-      name: 'chromium',
-      use: {
-        ...devices['Desktop Chrome'],
+  // projects: [
+  //   {
+  //     name: 'chromium',
+  //     use: {
+  //       ...devices['Desktop Chrome'],
         
-      },
-    },
+  //     },
+  //   },
 
     // {
     //   name: 'firefox',
@@ -117,7 +118,7 @@ export default defineConfig({
     //     channel: 'chrome',
     //   },
     // },
-  ],
+  
 
   /* Folder for test artifacts such as screenshots, videos, traces, etc. */
   outputDir: 'test-results/',

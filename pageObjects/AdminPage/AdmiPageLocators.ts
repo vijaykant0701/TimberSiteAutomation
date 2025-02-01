@@ -12,7 +12,7 @@ export const locators = {
     dateTimeIn:'input[name="timeIn"]',
     dateTimeOut: 'input[name="timeOut"]',
     txtNote:"//*[normalize-space(text())='Field Worker Notes']//following::textarea[1]",
-    costCode:'//div[contains(@class, "MuiAutocomplete-inputRoot")]//button[@aria-label="Open"]',
+    changeCostCode:'//button[text()= "Change Cost Code"]',
     breakStartTime:"//label[contains(text(), 'Break started')]/following::input[@name='timeIn']",
     breakOutTime:"//label[contains(text(), 'Break ended')]/following::input[@name='timeOut']",
     estimateRadioButton:'input[type="radio"][value="li"]',

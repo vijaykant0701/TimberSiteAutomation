@@ -10,22 +10,6 @@ export class AdminPage extends CommonPage {
     constructor(public page: Page, public scenario: CommonScenario) {
         super(page, scenario);
     }
-    
-
-    async searchOrderAndSelect() {
-        let orderFound = false;
-        await this.page.waitForSelector('tbody');
-        for (const row of await this.page.locator(locators.rows).all()) {
-            const matchrowOrderId = await row.locator("th").textContent();
-            if (this.getValue("Cost Code")!.includes(matchrowOrderId!)) {
-                await row.locator(locators.AdminTab).click();
-                orderFound = true;
-                break;
-            }
-        }
-        expect(orderFound).toBeTruthy();
-        this.takeScreenshot("Orders page");
-    }
 
     async clickOnAdminTab() {
         await this.page.locator(locators.TimeTracking).click();
@@ -156,12 +140,13 @@ export class AdminPage extends CommonPage {
 
     }
     async changeCostCode() {
-      await this.page.locator(locators.costCode).nth(5).click();
+      await this.page.locator(locators.changeCostCode).click();
               //await this.page.waitForTimeout(2000);
               await this.page.waitForTimeout(2000);
-              // await this.page.keyboard.press('Tab');
-              // await this.page.keyboard.type("Floo");
-              await this.page.keyboard.press('ArrowDown');
+              await this.page.keyboard.press('Tab');
+              await this.page.keyboard.press('Tab');
+              await this.page.keyboard.type("Flooring (610-40 - Flooring (carpet / wood / LVP) - Subcontractor)");
+              //await this.page.keyboard.press('ArrowDown');
               await this.page.keyboard.press('Enter');
               await this.page.waitForTimeout(2000);
     }
