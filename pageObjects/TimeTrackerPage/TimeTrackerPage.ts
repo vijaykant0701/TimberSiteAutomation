@@ -77,8 +77,10 @@ export class TimeTrackerPage extends CommonPage {
             await this.page.locator(locators.TimeTracker).waitFor({ state: 'visible' });
             await this.page.locator(locators.TimeTracker).click();
             
-            await this.page.locator(locators.addNewEntry).waitFor({ state: 'visible' });
-            await this.page.locator(locators.addNewEntry).click();
+            const button = this.page.locator(locators.addNewEntry);
+            await button.scrollIntoViewIfNeeded();
+            await button.waitFor({ state: 'visible' });
+            await button.click();
     
         await this.page.waitForTimeout(2000);
         const radioButton = this.page.locator(locators.radioChangeOrder).click();
@@ -249,8 +251,9 @@ export class TimeTrackerPage extends CommonPage {
         await this.page.locator(locators.btn_OK).click();
         const clockout = await this.page.locator(locators.clockOut).isEnabled;
         expect(clockout).toBeTruthy;
+       //await this.page.locator(locators.clockOut).click();
         await this.page.waitForLoadState('networkidle');
-        await this.page.waitForTimeout(1000);
+        await this.page.waitForLoadState('domcontentloaded');
         await this.page.waitForTimeout(1000);
         await this.page.waitForTimeout(1000);
         await this.page.locator(locators.changeCostCode).click();
