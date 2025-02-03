@@ -44,12 +44,14 @@ export class TimeTrackerPage extends CommonPage {
         await this.page.waitForTimeout(1000);
         await this.page.waitForTimeout(1000);
         await this.page.keyboard.press('Tab');
-        await this.page.keyboard.type("Demo (075-40 - Demolition - Subcontractor)");
+        await this.page.keyboard.type("Demo");
         await this.page.waitForTimeout(2000);
         await this.page.keyboard.press('ArrowDown');
         await this.page.keyboard.press('Enter');
 
-        await this.page.locator(locators.btn_OK).waitFor({ state: 'visible' });
+        await this.page.waitForLoadState('networkidle');  
+        await this.page.waitForSelector(locators.btn_OK, { state: 'visible', timeout: 50000 });  
+        await this.page.locator(locators.btn_OK).scrollIntoViewIfNeeded();  
         await this.page.locator(locators.btn_OK).click();
     
 
@@ -129,36 +131,37 @@ export class TimeTrackerPage extends CommonPage {
         await this.page.keyboard.press('Tab');
         await this.page.keyboard.press('Tab');
         await this.page.keyboard.type("First estimate 1 test");
-        await this.page.waitForTimeout(2000);
+        await this.page.waitForLoadState('load', { timeout: 10000 }); 
         await this.page.keyboard.press('ArrowDown');
         await this.page.keyboard.press('Enter');
-        await this.page.waitForTimeout(1000);
-        await this.page.waitForTimeout(1000);
-        await this.page.waitForTimeout(1000);
+        // await this.page.waitForTimeout(1000);
+        // await this.page.waitForTimeout(1000);
+        await this.page.locator(locators.costCodeDropdown).waitFor({ state: 'visible', timeout: 10000 });
         await this.page.keyboard.press('Tab');
-        await this.page.keyboard.type("Demo (075-40 - Demolition - Subcontractor)");
-        await this.page.waitForTimeout(2000);
+        await this.page.keyboard.type("Demo");
+        await this.page.waitForLoadState('load', { timeout: 10000 }); 
         await this.page.keyboard.press('ArrowDown');
         await this.page.keyboard.press('Enter');
-        await this.page.waitForTimeout(2000);
+        await this.page.waitForLoadState('domcontentloaded');
+        await this.page.waitForSelector(locators.txtNote, { state: 'visible', timeout: 50000 });
         const labelLocator = this.page.locator(locators.txtNote);
         labelLocator.fill('Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large.')
         await this.page.locator(locators.btn_OK).waitFor({ state: 'visible' });
         await this.page.locator(locators.btn_OK).click();
-        await this.page.waitForTimeout(1000);
-        await this.page.waitForTimeout(1000);
-        await this.page.waitForTimeout(1000);
+        // await this.page.waitForTimeout(1000);
+        // await this.page.waitForTimeout(1000);
+        await this.page.waitForLoadState('load', { timeout: 10000 }); 
         const clockout = await this.page.locator(locators.clockOut).isEnabled;
         expect(clockout).toBeTruthy;
-        await this.page.waitForTimeout(1000);
+        await this.page.waitForLoadState('load', { timeout: 10000 }); 
         await this.page.locator(locators.clockOut).click();
         //await this.page.waitForTimeout(2000);
         await this.page.locator(locators.dataTimeInput).fill(dateTimeValueClockOut);
         await this.page.locator(locators.btn_OK).click();
-        await this.page.waitForTimeout(2000);
+        await this.page.waitForLoadState('load', { timeout: 10000 }); 
         const costCodeElement = this.page.locator(locators.resultTable);
-        await this.page.waitForTimeout(2000);
-        await this.page.waitForTimeout(2000);
+        //await this.page.waitForTimeout(2000);
+        await this.page.waitForLoadState('load', { timeout: 10000 }); 
         const costCodeValue = this.page.locator(locators.addNewEntry).isVisible;
         console.log(costCodeValue);
         expect(costCodeValue).toBeTruthy;
@@ -187,24 +190,24 @@ export class TimeTrackerPage extends CommonPage {
       
         await this.page.locator(locators.calendarIcon).click();
         await this.page.locator(locators.dataTimeInput).fill(dateTimeValueClockIn); 
-        await this.page.waitForTimeout(5000);
+        await this.page.waitForLoadState('load', { timeout: 10000 }); 
         await this.page.locator(locators.calendarIcon).click();
         await this.page.keyboard.press('Tab');
         await this.page.keyboard.press('Tab');
         await this.page.keyboard.type("First estimate 1 test");
-        await this.page.waitForTimeout(2000);
+        await this.page.waitForLoadState('load', { timeout: 10000 }); 
         await this.page.keyboard.press('ArrowDown');
         await this.page.keyboard.press('Enter');
-        await this.page.waitForTimeout(1000);
-        await this.page.waitForTimeout(1000);
-        await this.page.waitForTimeout(1000);
+        // await this.page.waitForTimeout(1000);
+        // await this.page.waitForTimeout(1000);
+        await this.page.waitForLoadState('load', { timeout: 10000 }); 
         await this.page.keyboard.press('Tab');
         await this.page.keyboard.type("Demo");
-        await this.page.waitForTimeout(2000);
+        await this.page.waitForLoadState('load', { timeout: 10000 }); 
         await this.page.keyboard.press('ArrowDown');
         await this.page.keyboard.press('Enter');
         await this.page.locator(locators.btn_OK).click();
-        await this.page.waitForTimeout(2000);
+        await this.page.waitForLoadState('load', { timeout: 10000 }); 
     }catch{
 
     }
@@ -227,21 +230,21 @@ export class TimeTrackerPage extends CommonPage {
       
         await this.page.locator(locators.calendarIcon).click();
         await this.page.locator(locators.dataTimeInput).fill(dateTimeValueClockIn); 
-        await this.page.waitForTimeout(5000);
+        await this.page.waitForLoadState('load', { timeout: 10000 }); 
         await this.page.locator(locators.calendarIcon).click();
-        await this.page.waitForTimeout(1000);
+        await this.page.waitForLoadState('load', { timeout: 10000 }); 
         await this.page.keyboard.press('Tab');
         await this.page.keyboard.press('Tab');
         await this.page.keyboard.type("First estimate 1 test");
-        await this.page.waitForTimeout(2000);
+        await this.page.waitForLoadState('load', { timeout: 10000 }); 
         await this.page.keyboard.press('ArrowDown');
         await this.page.keyboard.press('Enter');
-        await this.page.waitForTimeout(1000);
-        await this.page.waitForTimeout(1000);
-        await this.page.waitForTimeout(1000);
+        // await this.page.waitForTimeout(1000);
+        // await this.page.waitForTimeout(1000);
+        await this.page.locator(locators.costCodeDropdown).waitFor({ state: 'visible', timeout: 10000 });
         await this.page.keyboard.press('Tab');
         await this.page.keyboard.type("Demo");
-        await this.page.waitForTimeout(2000);
+        await this.page.waitForLoadState('load', { timeout: 10000 }); 
         await this.page.keyboard.press('ArrowDown');
         await this.page.keyboard.press('Enter');
         await this.page.waitForLoadState('networkidle');
@@ -259,8 +262,9 @@ export class TimeTrackerPage extends CommonPage {
         await this.page.locator(locators.changeCostCode).click();
         //await this.page.waitForTimeout(2000);
         await this.page.waitForLoadState('networkidle');
+        await this.page.locator(locators.costCodeDropdown).waitFor({ state: 'visible', timeout: 10000 });
         await this.page.keyboard.press('Tab');
-        await this.page.keyboard.type("Flooring)");
+        await this.page.keyboard.type("Floor");
         await //this.page.keyboard.press('ArrowDown');
         await this.page.keyboard.press('Enter');
         await this.page.waitForLoadState('networkidle');
@@ -284,30 +288,27 @@ export class TimeTrackerPage extends CommonPage {
         await this.page.locator(locators.addNewEntry).click();
     }
 
-    async selectEstimateAndApprovedDropdown() {
+    async selectEstimateAndCostCode() {
         try{
-        await this.page.waitForTimeout(2000);
-        await this.page.locator(locators.estimateRadioButton).click();
-        await this.page.waitForTimeout(2000);
-        await this.page.keyboard.press('Tab');
-        await this.page.keyboard.type("First estimate 1 test");
+        await this.page.waitForLoadState('load', { timeout: 10000 }); 
+        await this.page.locator(locators.estimateCodeInput).click();
+        // await this.page.locator(locators.estimateDropdownButton).waitFor({ state: 'visible', timeout: 10000 });
+        await this.page.keyboard.type("First");
+        await this.page.waitForLoadState('load', { timeout: 10000 }); 
         await this.page.keyboard.press('ArrowDown');
         await this.page.keyboard.press('Enter');
+        await this.page.locator(locators.costCodeDropdown).waitFor({ state: 'visible', timeout: 10000 });
+        await this.page.keyboard.press('Tab');
+        await this.page.keyboard.type("Demo");
+        await this.page.waitForLoadState('load', { timeout: 10000 }); 
+        await this.page.keyboard.press('ArrowDown');
+        await this.page.keyboard.press('Enter');
+        await this.page.waitForLoadState('load', { timeout: 10000 }); 
         }catch{
 
         }
     }
 
-    async selectCostCode() {
-        //await this.page.locator(locators.costCodeDropdown).click();
-        //await this.page.waitForTimeout(2000);
-        await this.page.waitForTimeout(2000);
-        // await this.page.keyboard.press('Tab');
-        // await this.page.keyboard.type("Floo");
-        await this.page.keyboard.press('ArrowDown');
-        await this.page.keyboard.press('Enter');
-        await this.page.waitForTimeout(2000);
-    }
 
     async clickOkBtn() {
         await this.page.locator(locators.btn_OK).click();

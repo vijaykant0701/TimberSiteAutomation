@@ -15,13 +15,13 @@ export const locators = {
     resultTable:'div[data-field="costCodeTimeRef"] p.MuiTypography-body1',
     radioChangeOrder:'//input[@value="chg"]',
     txtNote:'//*[@id="outlined-textarea-label"]',
-    changeCostCode:"//label[text()='Cost Code']/following-sibling::div//button[@aria-label='Open']",
+    changeCostCode:'svg[data-testid="EditIcon"]',
     btn_Save:'//button[text()= "Save"]',
-    directionButton:'button:has-text("Directions")',
+    directionButton:'//button[text()= "Directions"]',
     estimateRadioButton:'input[type="radio"][value="li"]',
-    estimateDropdownButton:"(//div[contains(@class, 'MuiAutocomplete-inputRoot')]//button[@aria-label='Open'])[2]",
-    costCodeDropdown:"(//div[contains(@class, 'MuiAutocomplete-inputRoot')]//button[@aria-label='Open'])[3]",
-
+    estimateDropdownButton:"//label[text()='Estimate']/following-sibling::div//button[@aria-label='Open']",
+    costCodeDropdown:"//label[text()='Cost Code']/following-sibling::div//button[@aria-label='Open']",
+    estimateCodeInput:"//label[text()='Estimate']/following-sibling::div//input",
 }
 
 
