@@ -13,8 +13,9 @@ export class AdminPage extends CommonPage {
 
     async clickOnAdminTab() {
         await this.page.locator(locators.TimeTracking).click();
+        await this.page.waitForLoadState('load', { timeout: 10000 });
         await this.page.locator(locators.AdminTab).click();
-        await this.page.waitForTimeout(5000);
+        await this.page.waitForLoadState('load', { timeout: 10000 });
 
     }
 
