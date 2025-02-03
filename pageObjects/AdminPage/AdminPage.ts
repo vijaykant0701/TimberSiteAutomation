@@ -36,13 +36,13 @@ export class AdminPage extends CommonPage {
     }
 
     async editTheRecord(){
-        await this.page.waitForTimeout(2000);
+      await this.page.waitForLoadState('load', { timeout: 10000 }); 
         await this.page.locator(locators.estimateRadioButton).click();
-        await this.page.waitForTimeout(2000);
+        await this.page.waitForLoadState('load', { timeout: 3000 }); 
         await this.page.locator(locators.estimateDropdownButton).click();
-        await this.page.waitForTimeout(2000);
+        await this.page.waitForLoadState('load', { timeout: 3000 }); 
         await this.page.keyboard.press('ArrowUp');
-        await this.page.waitForTimeout(2000);
+        await this.page.waitForLoadState('load', { timeout: 3000 }); 
         await this.page.keyboard.press('Enter');
         await this.page.waitForLoadState('load', { timeout: 10000 }); 
         await this.page.keyboard.press('Tab');
@@ -181,9 +181,9 @@ export class AdminPage extends CommonPage {
       const formattedBreakOutTime = `${mm}/${dd}/${yyyy} ${fixedTime}`;
       console.log(`Formatted Date-Time : ${formattedBreakOutTime}`);
       await this.page.fill(locators.breakOutTime, formattedBreakOutTime);
-      await this.page.waitForTimeout(2000);
+      await this.page.waitForLoadState('load', { timeout: 10000 }); 
       const enteredBreakOutTime = await this.page.inputValue(locators.breakOutTime);
-      await this.page.waitForTimeout(2000);
+      await this.page.waitForLoadState('load', { timeout: 10000 }); 
       console.log(`Entered Date-Time: ${enteredBreakOutTime}`);
       }
 
