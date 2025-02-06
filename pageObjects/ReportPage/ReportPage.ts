@@ -16,7 +16,7 @@ export class ReportPage extends CommonPage {
 
     async clickOnReportTab() {
         await this.page.locator(locators.TimeTracking).click();
-        await this.page.waitForTimeout(2000);
+        await this.page.waitForLoadState('load', { timeout: 10000 });
         await this.page.locator(locators.ReportTab).click();
     }
 
@@ -87,13 +87,13 @@ export class ReportPage extends CommonPage {
 
     async selectReportTypeHourly() {
         await this.page.locator(locators.typeDropdown).click();
-        await this.page.waitForTimeout(2000);
+        await this.page.waitForLoadState('load', { timeout: 10000 });
         await this.page.getByRole('option', { name: 'Hourly' }).click();
     }
 
     async selectReportTypeInvoice() {
         await this.page.locator(locators.typeDropdown).click();
-        await this.page.waitForTimeout(2000);
+        await this.page.waitForLoadState('load', { timeout: 10000 });
         await this.page.getByRole('option', { name: 'Invoice' }).click();
     }
 

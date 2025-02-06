@@ -2,7 +2,7 @@
 export const locators = {
     TimeTracking: 'svg[data-testid="KeyboardArrowDownIcon"]',
     TimeTracker :'li.MuiMenuItem-root:has-text("Time Tracker")',
-    addNewEntry: "//*[normalize-space(text())='New Time Entry']",//'svg[data-testid="AddIcon"]',
+    addNewEntry: "text=New Time Entry",//'svg[data-testid="AddIcon"]',
     dataTimeInput:'input[placeholder="MM/DD/YYYY hh:mm aa"][type="text"]',
     calendarIcon: 'svg[data-testid="CalendarIcon"]',
     estimateRadioBtn: '[name="Estimate"]',
@@ -17,11 +17,11 @@ export const locators = {
     txtNote:'//*[@id="outlined-textarea-label"]',
     changeCostCode:'svg[data-testid="EditIcon"]',
     btn_Save:'//button[text()= "Save"]',
-    directionButton:'button:has-text("Directions")',
+    directionButton:'//button[text()= "Directions"]',
     estimateRadioButton:'input[type="radio"][value="li"]',
-    estimateDropdownButton:"(//div[contains(@class, 'MuiAutocomplete-inputRoot')]//button[@aria-label='Open'])[2]",
-    costCodeDropdown:"(//div[contains(@class, 'MuiAutocomplete-inputRoot')]//button[@aria-label='Open'])[3]",
-
+    estimateDropdownButton:"//label[text()='Estimate']/following-sibling::div//button[@aria-label='Open']",
+    costCodeDropdown:"//label[text()='Cost Code']/following-sibling::div//button[@aria-label='Open']",
+    estimateCodeInput:"//label[text()='Estimate']/following-sibling::div//input",
 }
 
 

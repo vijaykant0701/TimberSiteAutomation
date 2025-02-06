@@ -13,8 +13,9 @@ export class AdminPage extends CommonPage {
 
     async clickOnAdminTab() {
         await this.page.locator(locators.TimeTracking).click();
+        await this.page.waitForLoadState('load', { timeout: 10000 });
         await this.page.locator(locators.AdminTab).click();
-        await this.page.waitForTimeout(5000);
+        await this.page.waitForLoadState('load', { timeout: 10000 });
 
     }
 
@@ -36,15 +37,15 @@ export class AdminPage extends CommonPage {
     }
 
     async editTheRecord(){
-        await this.page.waitForTimeout(2000);
+      await this.page.waitForLoadState('load', { timeout: 10000 }); 
         await this.page.locator(locators.estimateRadioButton).click();
-        await this.page.waitForTimeout(2000);
+        await this.page.waitForLoadState('load', { timeout: 3000 }); 
         await this.page.locator(locators.estimateDropdownButton).click();
-        //await this.page.waitForTimeout(2000);
-        //await this.page.keyboard.press('ArrowDown');
-        await this.page.waitForTimeout(2000);
+        await this.page.waitForLoadState('load', { timeout: 3000 }); 
+        await this.page.keyboard.press('ArrowUp');
+        await this.page.waitForLoadState('load', { timeout: 3000 }); 
         await this.page.keyboard.press('Enter');
-        await this.page.waitForTimeout(2000);
+        await this.page.waitForLoadState('load', { timeout: 10000 }); 
         await this.page.keyboard.press('Tab');
         await this.page.keyboard.type("Floo");
         await this.page.keyboard.press('ArrowDown');
@@ -71,7 +72,8 @@ export class AdminPage extends CommonPage {
 
     }
     async addBreak() {
-      await this.page.waitForSelector(locators.addBreak, { timeout: 10000 }); 
+      await this.page.locator(locators.addBreak).waitFor({ state: 'attached' });
+      await this.page.locator(locators.addBreak).scrollIntoViewIfNeeded();
       await this.page.locator(locators.addBreak).click();
       await this.page.waitForLoadState('domcontentloaded');
       //await this.page.keyboard.press('Tab');
@@ -111,6 +113,7 @@ export class AdminPage extends CommonPage {
     const hh = String(hours).padStart(2, '0');
     const formattedDateTime = `${mm}/${dd}/${yyyy} ${hh}:${minutes} ${ampm}`;
     console.log(`Formatted Date-time : ${formattedDateTime}`);
+    await this.page.locator(locators.dateTimeIn).click();
     await this.page.fill(locators.dateTimeIn, formattedDateTime);
     const enteredDateTime = await this.page.inputValue(locators.dateTimeIn);
     console.log(`Entered Date-Time: ${enteredDateTime}`);
@@ -129,6 +132,7 @@ export class AdminPage extends CommonPage {
     const hh = String(hours).padStart(2, '0');
     const formattedDateTime = `${mm}/${dd}/${yyyy} ${hh}:${minutes} ${ampm}`;
     console.log(`Formatted Date-time : ${formattedDateTime}`);
+    await this.page.locator(locators.dateTimeOut).click();
     await this.page.fill(locators.dateTimeOut, formattedDateTime);
     const enteredDateTime = await this.page.inputValue(locators.dateTimeOut);
     console.log(`Entered Date-Time: ${enteredDateTime}`);
@@ -178,9 +182,9 @@ export class AdminPage extends CommonPage {
       const formattedBreakOutTime = `${mm}/${dd}/${yyyy} ${fixedTime}`;
       console.log(`Formatted Date-Time : ${formattedBreakOutTime}`);
       await this.page.fill(locators.breakOutTime, formattedBreakOutTime);
-      await this.page.waitForTimeout(2000);
+      await this.page.waitForLoadState('load', { timeout: 10000 }); 
       const enteredBreakOutTime = await this.page.inputValue(locators.breakOutTime);
-      await this.page.waitForTimeout(2000);
+      await this.page.waitForLoadState('load', { timeout: 10000 }); 
       console.log(`Entered Date-Time: ${enteredBreakOutTime}`);
       }
 
