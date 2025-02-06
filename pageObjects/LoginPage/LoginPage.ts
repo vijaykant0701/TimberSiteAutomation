@@ -14,8 +14,8 @@ export class LoginPage extends CommonPage {
   async goTo() {
 
     await this.page.goto(testData.qa);
-    await this.page.waitForTimeout(3000);
-    await this.page.keyboard.press('Control+Meta+F');
+    await this.page.waitForLoadState('domcontentloaded');
+    
   }
 
   async navigateToLoginPage() {
