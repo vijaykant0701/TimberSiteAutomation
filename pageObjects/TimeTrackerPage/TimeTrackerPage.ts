@@ -326,7 +326,7 @@ export class TimeTrackerPage extends CommonPage {
     async clickonClockOutButton() {
         await this.page.locator(locators.clockOut).isVisible();
         await this.page.waitForSelector(locators.btn_OK);
-        await this.page.locator(locators.btn_OK);
+        await this.page.locator(locators.btn_OK)
     }
 
 }
