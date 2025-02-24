@@ -13,15 +13,16 @@ export const locators = {
     Link_direction:'//button[text()= "Directions"]',
     clockOut:'svg[data-testid="PunchClockIcon"]',
     resultTable:'div[data-field="costCodeTimeRef"] p.MuiTypography-body1',
-    radioChangeOrder:'//input[@value="chg"]',
+    radioChangeOrder:'input[type="radio"][value="chg"]',
     txtNote:'//*[@id="outlined-textarea-label"]',
     changeCostCode:'svg[data-testid="EditIcon"]',
     btn_Save:'//button[text()= "Save"]',
-    directionButton:'//button[text()= "Directions"]',
+    directionButton:'[data-testid="NavigationIcon"]',
     estimateRadioButton:'input[type="radio"][value="li"]',
     estimateDropdownButton:"//label[text()='Estimate']/following-sibling::div//button[@aria-label='Open']",
     costCodeDropdown:"//label[text()='Cost Code']/following-sibling::div//button[@aria-label='Open']",
-    estimateCodeInput:"//label[text()='Estimate']/following-sibling::div//input",
+    estimateCodeInput:'[data-testid="select-estimate"]',
+    costCodeInput:'[data-testid="select-cost-code"]',
 }
 
 

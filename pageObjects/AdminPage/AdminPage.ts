@@ -20,32 +20,33 @@ export class AdminPage extends CommonPage {
     }
 
     async clickOnRecord() {
-        const nodes = this.page.locator('tr.MuiTableRow-root td').nth(1);
+        // const nodes = this.page.locator('tr.MuiTableRow-root td');
 
-        // Get the count of matching nodes
-        const nodeCount = await nodes.count();
-        console.log(`Found ${nodeCount} matching nodes.`);
+        // // Get the count of matching nodes
+        // const nodeCount = await nodes.count();
+        // console.log(`Found ${nodeCount} matching nodes.`);
       
-        // Click on the first node if it exists
-        if (nodeCount > 0) {
-          await nodes.first().click();
-          await this.page.waitForTimeout(5000);
-          console.log('Clicked on the first node.');
-        } else {
-          console.log('No matching nodes found.');
-        }
+        // // Click on the first node if it exists
+        // if (nodeCount > 0) {
+        //   await nodes.first().click();
+        //   await this.page.waitForTimeout(5000);
+        //   console.log('Clicked on the first node.');
+        // } else {
+        //   console.log('No matching nodes found.');
+        // }
+        await this.page.locator('tr.MuiTableRow-root').nth(1).click();
     }
 
     async editTheRecord(){
-      await this.page.waitForLoadState('load', { timeout: 10000 }); 
+      await this.page.waitForSelector(locators.estimateRadioButton);
         await this.page.locator(locators.estimateRadioButton).click();
         await this.page.waitForLoadState('load', { timeout: 3000 }); 
         await this.page.locator(locators.estimateDropdownButton).click();
         await this.page.waitForLoadState('load', { timeout: 3000 }); 
-        await this.page.keyboard.press('ArrowUp');
-        await this.page.waitForLoadState('load', { timeout: 3000 }); 
+        await this.page.keyboard.press('ArrowUp'); 
         await this.page.keyboard.press('Enter');
         await this.page.waitForLoadState('load', { timeout: 10000 }); 
+        await this.page.waitForSelector(locators.costCodeInput);
         await this.page.keyboard.press('Tab');
         await this.page.keyboard.type("Floo");
         await this.page.keyboard.press('ArrowDown');
@@ -96,11 +97,12 @@ export class AdminPage extends CommonPage {
 
     }
     async clickSaveAndApprove() {
+      await this.page.waitForSelector(locators.saveAndApproveButton);
       await this.page.locator(locators.saveAndApproveButton).click();
     }
 
     async editDateTimeIn() {
-      const dateTimeInput = this.page.locator(locators.dateTimeIn);
+      const dateTimeInput = this.page.locator(locators.dateTimeIn).nth(0);
       const now = new Date();
     const futureTime = new Date(now.getTime() + 30 * 60 * 1000);
     const mm = String(futureTime.getMonth() + 1).padStart(2, '0'); // Months are 0-based
@@ -113,13 +115,13 @@ export class AdminPage extends CommonPage {
     const hh = String(hours).padStart(2, '0');
     const formattedDateTime = `${mm}/${dd}/${yyyy} ${hh}:${minutes} ${ampm}`;
     console.log(`Formatted Date-time : ${formattedDateTime}`);
-    await this.page.locator(locators.dateTimeIn).click();
-    await this.page.fill(locators.dateTimeIn, formattedDateTime);
+    await this.page.locator(locators.dateTimeIn).nth(0).click();
+    await dateTimeInput.fill(formattedDateTime);
     const enteredDateTime = await this.page.inputValue(locators.dateTimeIn);
     console.log(`Entered Date-Time: ${enteredDateTime}`);
     }
     async editDateTimeOut() {
-      const dateTimeOut = this.page.locator(locators.dateTimeOut);
+      const dateTimeOut = this.page.locator(locators.dateTimeOut).nth(0);
       const now = new Date();
     const futureTime = new Date(now.getTime() + 8 * 60 * 60 * 1000);
     const mm = String(futureTime.getMonth() + 1).padStart(2, '0'); // Months are 0-based
@@ -132,8 +134,8 @@ export class AdminPage extends CommonPage {
     const hh = String(hours).padStart(2, '0');
     const formattedDateTime = `${mm}/${dd}/${yyyy} ${hh}:${minutes} ${ampm}`;
     console.log(`Formatted Date-time : ${formattedDateTime}`);
-    await this.page.locator(locators.dateTimeOut).click();
-    await this.page.fill(locators.dateTimeOut, formattedDateTime);
+    await this.page.locator(locators.dateTimeOut).nth(0).click();
+    await dateTimeOut.fill(formattedDateTime);
     const enteredDateTime = await this.page.inputValue(locators.dateTimeOut);
     console.log(`Entered Date-Time: ${enteredDateTime}`);
     }
@@ -144,15 +146,21 @@ export class AdminPage extends CommonPage {
 
     }
     async changeCostCode() {
-      await this.page.locator(locators.changeCostCode).click();
-              //await this.page.waitForTimeout(2000);
-              await this.page.waitForTimeout(2000);
-              await this.page.keyboard.press('Tab');
-              await this.page.keyboard.press('Tab');
-              await this.page.keyboard.type("Flooring (610-40 - Flooring (carpet / wood / LVP) - Subcontractor)");
-              //await this.page.keyboard.press('ArrowDown');
-              await this.page.keyboard.press('Enter');
-              await this.page.waitForTimeout(2000);
+      await this.page.waitForSelector(locators.estimateInput);
+      await this.page.locator(locators.estimateInput).fill("first");
+      await this.page.waitForTimeout(2000);
+      await this.page.keyboard.press('ArrowDown');
+      await this.page.keyboard.press('Enter');
+      await this.page.waitForSelector(locators.costCodeInput);
+      await this.page.locator(locators.costCodeInput).fill("Floor")
+      // await this.page.waitForTimeout(2000);
+      // await this.page.keyboard.press('Tab');
+      // await this.page.keyboard.press('Tab');
+      // await this.page.keyboard.type("Flooring");
+      await this.page.waitForTimeout(2000);
+      await this.page.keyboard.press('ArrowDown');
+      await this.page.keyboard.press('Enter');
+      await this.page.waitForTimeout(2000);
     }
 
     async clickOnAddBreak() {
