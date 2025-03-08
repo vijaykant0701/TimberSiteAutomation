@@ -82,7 +82,8 @@ test.describe('TC_009', () => {
     await timeTrackerPage.clickOnNewEntry();
     await timeTrackerPage.selectEstimateAndCostCode();
     await timeTrackerPage.clickOkBtn();
-    await timeTrackerPage.verifyDirection();
+    await timeTrackerPage.verifyDirectionButton();
+    await timeTrackerPage.clickonClockOutButton();
   });
 
 });

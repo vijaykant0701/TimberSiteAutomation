@@ -8,7 +8,7 @@ export const locators = {
     dropdownArrow:'label[for="mui-31"]',
     addBreak:'//button[text()= "Add"]',
     estimateDropdownButton:"//label[text()='Estimate']/following-sibling::div//button[@aria-label='Open']",
-    saveAndApproveButton: '//button[text()= "Save & Approve"]',
+    saveAndApproveButton: 'button:has-text("Save & Approve")',
     dateTimeIn:'input[name="timeIn"]',
     dateTimeOut: 'input[name="timeOut"]',
     txtNote:"//label[text()='Field Worker Notes']/following-sibling::div//textarea[not(@readonly)]",
@@ -22,6 +22,8 @@ export const locators = {
     statusDropdown:'div div[role="combobox"]',
     projectDropdown:'div button[aria-label="Open"]',
     workersDropdown:'div button[aria-label="Open"]',
+    costCodeInput:'[data-testid="select-cost-code"]',
+    estimateInput:'[data-testid="select-estimate"]',
 
 }
 
